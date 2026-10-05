@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice & Sizzle | Authentic Flavors. Unforgettable Moments.</title>
+    <meta name="description" content="Experience fine dining at Spice & Sizzle. Authentic Indian, Chinese, Artisanal Pizza, Gourmet Burgers, and Desserts. Book a table or order online.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0e0d0d',
+                            card: '#161515',
+                            accent: '#f97316',
+                            gold: '#d97706',
+                            goldLight: '#f59e0b',
+                            cream: '#fdfbf7',
+                            muted: '#a3a3a3'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0e0d0d;
+            color: #fdfbf7;
+            overflow-x: hidden;
+        }
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #ea580c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
+        }
+        .gold-border-glow:hover {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0d0d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+        .glass-panel {
+            background: rgba(22, 21, 21, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Hide scrollbars for clean category tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-stone-100 flex flex-col min-h-screen relative selection:bg-amber-500 selection:text-stone-950">
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-24 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-amber-700 via-orange-600 to-amber-700 text-stone-950 text-xs md:text-sm py-2 px-4 text-center font-bold tracking-wide shadow-md flex items-center justify-between">
+        <div class="container mx-auto flex justify-between items-center px-2">
+            <span class="hidden sm:inline-block"><i class="fa-solid fa-fire mr-1.5"></i> Special Offer: Use code <span class="bg-stone-900 text-amber-400 px-2 py-0.5 rounded ml-1 font-mono">SIZZLE20</span> for 20% OFF!</span>
+            <span class="sm:hidden mx-auto"><i class="fa-solid fa-fire mr-1"></i> Get 20% OFF with code <b>SIZZLE20</b></span>
+            <div class="hidden md:flex items-center gap-4 text-xs font-medium text-stone-900">
+                <a href="tel:7865443327" class="hover:underline flex items-center"><i class="fa-solid fa-phone mr-1"></i> +1 (786) 544-3327</a>
+                <span><i class="fa-regular fa-clock mr-1"></i> Open Daily: 11:00 AM - 11:00 PM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-stone-800/80 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" onclick="switchTab('home')" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-600 to-orange-500 flex items-center justify-center text-stone-950 shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-pepper-hot text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-heading text-2xl font-bold tracking-wider gold-gradient-text block leading-none">Spice & Sizzle</span>
+                    <span class="text-[10px] uppercase tracking-widest text-amber-500/80 font-semibold block mt-1">Artisanal Fine Dining</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-8 font-medium text-sm tracking-wider uppercase text-stone-300">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-link hover:text-amber-400 transition-colors py-1 relative active text-amber-400 font-semibold">Home</button>
+                <button onclick="switchTab('menu')" id="nav-menu" class="nav-link hover:text-amber-400 transition-colors py-1 relative">Menu</button>
+                <button onclick="switchTab('reservation')" id="nav-reservation" class="nav-link hover:text-amber-400 transition-colors py-1 relative">Book Table</button>
+                <button onclick="switchTab('about')" id="nav-about" class="nav-link hover:text-amber-400 transition-colors py-1 relative">About Us</button>
+                <button onclick="switchTab('contact')" id="nav-contact" class="nav-link hover:text-amber-400 transition-colors py-1 relative">Contact</button>
+            </nav>
+
+            <!-- Actions & Cart Button -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCartModal()" class="relative bg-stone-900 border border-amber-500/30 hover:border-amber-500 p-2.5 rounded-full text-stone-200 hover:text-amber-400 transition-all shadow-inner group">
+                    <i class="fa-solid fa-utensils text-lg group-hover:scale-110 transition-transform"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-gradient-to-r from-amber-500 to-orange-600 text-stone-950 font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md scale-0 transition-transform">0</span>
+                </button>
+
+                <button onclick="switchTab('reservation')" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-stone-950 font-semibold px-5 py-2.5 rounded-full text-sm shadow-md transition-all duration-300 hover:shadow-amber-500/20">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Book a Table</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-stone-300 hover:text-amber-400 text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars" id="hamburger-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-brand-card border-b border-stone-800 px-6 py-6 space-y-4 transition-all">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 text-stone-200 hover:text-amber-400 font-medium tracking-wide uppercase border-b border-stone-800/50">Home</button>
+            <button onclick="switchTab('menu'); toggleMobileMenu();" class="block w-full text-left py-2 text-stone-200 hover:text-amber-400 font-medium tracking-wide uppercase border-b border-stone-800/50">Full Food Menu</button>
+            <button onclick="switchTab('reservation'); toggleMobileMenu();" class="block w-full text-left py-2 text-stone-200 hover:text-amber-400 font-medium tracking-wide uppercase border-b border-stone-800/50">Book a Table</button>
+            <button onclick="switchTab('about'); toggleMobileMenu();" class="block w-full text-left py-2 text-stone-200 hover:text-amber-400 font-medium tracking-wide uppercase border-b border-stone-800/50">About Spice & Sizzle</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="block w-full text-left py-2 text-stone-200 hover:text-amber-400 font-medium tracking-wide uppercase border-b border-stone-800/50">Contact & Hours</button>
+            
+            <div class="pt-2 flex flex-col gap-3">
+                <a href="tel:7865443327" class="w-full text-center bg-stone-900 border border-stone-700 py-2.5 rounded-xl text-amber-400 text-sm font-semibold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> Call +1 (786) 544-3327
+                </a>
+                <button onclick="switchTab('reservation'); toggleMobileMenu();" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-stone-950 font-bold py-3 rounded-xl text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-alt"></i> Reserve Your Table
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINERS (Multi-Tab Single Page Architecture) -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <section id="page-home" class="page-section">
+            
+            <!-- Hero Banner -->
+            <div class="relative min-h-[85vh] flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden" style="background-image: linear-gradient(to right, rgba(14, 13, 13, 0.92), rgba(14, 13, 13, 0.65)), url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1920&auto=format&fit=crop');">
+                
+                <!-- Glow & Vignette Accents -->
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
+                <div class="absolute -top-40 -left-40 w-96 h-96 bg-amber-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center py-20 z-10">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-semibold uppercase tracking-widest mb-6 backdrop-blur-md animate-pulse">
+                        <i class="fa-solid fa-crown text-xs"></i> Michelin-Inspired Culinary Experience
+                    </div>
+                    <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight">
+                        Authentic Flavors.<br>
+                        <span class="gold-gradient-text italic font-normal">Unforgettable Moments.</span>
+                    </h1>
+                    <p class="text-stone-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                        Indulge in an exquisite blend of authentic spices, sizzling charcoal grills, and modern gourmet creations crafted by world-class chefs.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                        <button onclick="switchTab('menu')" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-stone-950 font-bold px-8 py-4 rounded-full text-base transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/25 flex items-center justify-center gap-3">
+                            <span>Order Online</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
+                        <button onclick="switchTab('reservation')" class="w-full sm:w-auto bg-stone-900/80 hover:bg-stone-800 text-stone-100 border border-amber-500/40 hover:border-amber-400 font-semibold px-8 py-4 rounded-full text-base transition-all backdrop-blur-md flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-utensils text-amber-400"></i>
+                            <span>Book a Table</span>
+                        </button>
+                    </div>
+
+                    <!-- Floating Badges / Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-stone-800/80 max-w-4xl mx-auto text-left">
+                        <div class="p-4 bg-stone-900/50 rounded-2xl border border-stone-800/60 backdrop-blur-sm">
+                            <p class="font-heading text-2xl md:text-3xl font-bold text-amber-400">4.9 ★</p>
+                            <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider">5,000+ Reviews</p>
+                        </div>
+                        <div class="p-4 bg-stone-900/50 rounded-2xl border border-stone-800/60 backdrop-blur-sm">
+                            <p class="font-heading text-2xl md:text-3xl font-bold text-amber-400">100%</p>
+                            <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Fresh Ingredients</p>
+                        </div>
+                        <div class="p-4 bg-stone-900/50 rounded-2xl border border-stone-800/60 backdrop-blur-sm">
+                            <p class="font-heading text-2xl md:text-3xl font-bold text-amber-400">25+ Mins</p>
+                            <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Express Delivery</p>
+                        </div>
+                        <div class="p-4 bg-stone-900/50 rounded-2xl border border-stone-800/60 backdrop-blur-sm">
+                            <p class="font-heading text-2xl md:text-3xl font-bold text-amber-400">Master Chef</p>
+                            <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Culinary Excellence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Categories Section -->
+            <section class="py-20 bg-brand-dark relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-14">
+                        <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Culinary Experience</span>
+                        <h2 class="font-heading text-3xl sm:text-5xl font-bold mt-2 text-stone-100">Explore Popular Categories</h2>
+                        <div class="w-16 h-1 bg-amber-500 mx-auto mt-4 rounded-full"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+                        <!-- Category Item 1 -->
+                        <div onclick="filterCategoryAndSwitch('Pizza')" class="group cursor-pointer bg-brand-card hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-2 shadow-md">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4 transition-colors">
+                                <i class="fa-solid fa-pizza-slice"></i>
+                            </div>
+                            <h3 class="font-semibold text-stone-100 group-hover:text-amber-400 transition-colors">Artisanal Pizza</h3>
+                            <p class="text-xs text-stone-400 mt-1">Wood-fired perfection</p>
+                        </div>
+
+                        <!-- Category Item 2 -->
+                        <div onclick="filterCategoryAndSwitch('Burgers')" class="group cursor-pointer bg-brand-card hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-2 shadow-md">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4 transition-colors">
+                                <i class="fa-solid fa-burger"></i>
+                            </div>
+                            <h3 class="font-semibold text-stone-100 group-hover:text-amber-400 transition-colors">Gourmet Burgers</h3>
+                            <p class="text-xs text-stone-400 mt-1">Smoky & juicy</p>
+                        </div>
+
+                        <!-- Category Item 3 -->
+                        <div onclick="filterCategoryAndSwitch('Indian Specials')" class="group cursor-pointer bg-brand-card hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-2 shadow-md">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4 transition-colors">
+                                <i class="fa-solid fa-bowl-food"></i>
+                            </div>
+                            <h3 class="font-semibold text-stone-100 group-hover:text-amber-400 transition-colors">Indian Specials</h3>
+                            <p class="text-xs text-stone-400 mt-1">Rich spices & curries</p>
+                        </div>
+
+                        <!-- Category Item 4 -->
+                        <div onclick="filterCategoryAndSwitch('Chinese')" class="group cursor-pointer bg-brand-card hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-2 shadow-md">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4 transition-colors">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <h3 class="font-semibold text-stone-100 group-hover:text-amber-400 transition-colors">Asian & Chinese</h3>
+                            <p class="text-xs text-stone-400 mt-1">Authentic Wok Delights</p>
+                        </div>
+
+                        <!-- Category Item 5 -->
+                        <div onclick="filterCategoryAndSwitch('Desserts')" class="group cursor-pointer bg-brand-card hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-2 shadow-md">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4 transition-colors">
+                                <i class="fa-solid fa-ice-cream"></i>
+                            </div>
+                            <h3 class="font-semibold text-stone-100 group-hover:text-amber-400 transition-colors">Desserts</h3>
+                            <p class="text-xs text-stone-400 mt-1">Sweet creations</p>
+                        </div>
+
+                        <!-- Category Item 6 -->
+                        <div onclick="filterCategoryAndSwitch('Beverages')" class="group cursor-pointer bg-brand-card hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-2 shadow-md">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4 transition-colors">
+                                <i class="fa-solid fa-martini-glass-citrus"></i>
+                            </div>
+                            <h3 class="font-semibold text-stone-100 group-hover:text-amber-400 transition-colors">Beverages</h3>
+                            <p class="text-xs text-stone-400 mt-1">Crafted drinks & teas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Dishes Section -->
+            <section class="py-20 bg-stone-900/60 border-y border-stone-800/80">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                        <div>
+                            <span class="text-amber-500 uppercase tracking-widest text-xs font-bold"><i class="fa-solid fa-star mr-1"></i> Chef's Selection</span>
+                            <h2 class="font-heading text-3xl sm:text-5xl font-bold mt-2 text-stone-100">Signature Dishes</h2>
+                        </div>
+                        <button onclick="switchTab('menu')" class="mt-4 md:mt-0 text-amber-400 hover:text-amber-300 font-semibold inline-flex items-center gap-2 group text-sm uppercase tracking-wider">
+                            <span>View Full Menu</span>
+                            <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+
+                    <div id="featured-dishes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Dynamically populated via JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Special Offer Banner -->
+            <section class="py-16 my-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 border border-amber-500/30 p-8 sm:p-12 lg:p-16 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div class="absolute -right-20 -top-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                        
+                        <div class="max-w-2xl text-center md:text-left z-10">
+                            <span class="bg-amber-500 text-stone-950 text-xs font-extrabold uppercase px-3 py-1 rounded-full tracking-wider mb-4 inline-block">Limited Time Offer</span>
+                            <h3 class="font-heading text-3xl sm:text-5xl font-bold text-stone-100 leading-tight">
+                                Enjoy <span class="gold-gradient-text">20% OFF</span> On Your First Online Order!
+                            </h3>
+                            <p class="text-stone-300 mt-4 text-sm sm:text-base">
+                                Experience fine dining delivered right to your doorstep. Apply promo code <span class="text-amber-400 font-mono font-bold bg-stone-900 px-2 py-1 rounded border border-amber-500/30">SIZZLE20</span> at checkout.
+                            </p>
+                            <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+                                <button onclick="switchTab('menu')" class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-stone-950 font-bold px-7 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105">
+                                    Claim Discount Now
+                                </button>
+                                <a href="https://wa.me/17865443327?text=Hi%20Spice%20%26%20Sizzle,%20I%20would%20like%20to%20order%20with%20SIZZLE20%20promo!" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3.5 rounded-full text-sm flex items-center gap-2 shadow-md transition-colors">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 w-full max-w-sm md:w-auto flex justify-center">
+                            <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-amber-500/40 shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop" alt="Special Burger" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customer Reviews Carousel/Grid -->
+            <section class="py-20 bg-brand-dark">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Guest Stories</span>
+                        <h2 class="font-heading text-3xl sm:text-5xl font-bold mt-2 text-stone-100">What Our Guests Say</h2>
+                        <div class="w-16 h-1 bg-amber-500 mx-auto mt-4 rounded-full"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Review Card 1 -->
+                        <div class="bg-brand-card p-8 rounded-3xl border border-stone-800 relative flex flex-col justify-between">
+                            <div>
+                                <div class="flex text-amber-400 gap-1 text-sm mb-4">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-stone-300 italic text-sm leading-relaxed mb-6">
+                                    "Spice & Sizzle delivers the best Butter Chicken and Wood-fired Pizza in the city! The ambiance is unmatched and the online delivery was super fast and piping hot."
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-stone-800">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="Sophia M." class="w-12 h-12 rounded-full object-cover border border-amber-500">
+                                <div>
+                                    <h4 class="font-bold text-stone-100 text-sm">Sophia Martinez</h4>
+                                    <p class="text-xs text-amber-500">Food Critic & Regular Guest</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review Card 2 -->
+                        <div class="bg-brand-card p-8 rounded-3xl border border-stone-800 relative flex flex-col justify-between">
+                            <div>
+                                <div class="flex text-amber-400 gap-1 text-sm mb-4">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-stone-300 italic text-sm leading-relaxed mb-6">
+                                    "We booked a table for our 5th wedding anniversary. The hospitality, candle-lit setup, and Chef's Special sizzler exceeded every single expectation!"
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-stone-800">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="David R." class="w-12 h-12 rounded-full object-cover border border-amber-500">
+                                <div>
+                                    <h4 class="font-bold text-stone-100 text-sm">David Richardson</h4>
+                                    <p class="text-xs text-amber-500">Verified Diner</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review Card 3 -->
+                        <div class="bg-brand-card p-8 rounded-3xl border border-stone-800 relative flex flex-col justify-between">
+                            <div>
+                                <div class="flex text-amber-400 gap-1 text-sm mb-4">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-stone-300 italic text-sm leading-relaxed mb-6">
+                                    "The Truffle Wagyu Burger is legendary! Pair it with their handcrafted Mint Mojito for the ultimate weekend treat. 10/10 recommendation!"
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-stone-800">
+                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop" alt="Elena P." class="w-12 h-12 rounded-full object-cover border border-amber-500">
+                                <div>
+                                    <h4 class="font-bold text-stone-100 text-sm">Elena Patel</h4>
+                                    <p class="text-xs text-amber-500">Local Foodie</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+        <!-- ================= PAGE 2: MENU PAGE ================= -->
+        <section id="page-menu" class="page-section hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Page Title Header -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Artisanal Selection</span>
+                    <h1 class="font-heading text-4xl sm:text-6xl font-bold mt-2 text-stone-100">Our Gourmet Menu</h1>
+                    <p class="text-stone-400 text-sm sm:text-base mt-3">From rich traditional spices to wood-fired delicacies, explore culinary masterpieces prepared fresh to order.</p>
+                </div>
+
+                <!-- Search & Filter Bar Controls -->
+                <div class="bg-brand-card p-4 sm:p-6 rounded-3xl border border-stone-800 shadow-xl mb-10 space-y-4">
+                    <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                        
+                        <!-- Search Box -->
+                        <div class="relative w-full md:w-80">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+                            <input type="text" id="menu-search-input" onkeyup="handleMenuSearch()" placeholder="Search dishes, ingredients..." class="w-full bg-stone-900 border border-stone-700/80 rounded-full pl-11 pr-4 py-2.5 text-sm text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+
+                        <!-- Dietary Preference Filter -->
+                        <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+                            <span class="text-xs uppercase font-semibold text-stone-400 mr-2">Filter:</span>
+                            <button onclick="filterDietary('all')" id="diet-all" class="diet-btn px-4 py-1.5 rounded-full text-xs font-medium border border-amber-500 bg-amber-500 text-stone-950">All</button>
+                            <button onclick="filterDietary('veg')" id="diet-veg" class="diet-btn px-4 py-1.5 rounded-full text-xs font-medium border border-stone-700 bg-stone-900 text-emerald-400 hover:border-emerald-500">
+                                <i class="fa-solid fa-circle text-[8px] mr-1"></i> Veg Only
+                            </button>
+                            <button onclick="filterDietary('non-veg')" id="diet-non-veg" class="diet-btn px-4 py-1.5 rounded-full text-xs font-medium border border-stone-700 bg-stone-900 text-rose-400 hover:border-rose-500">
+                                <i class="fa-solid fa-square text-[8px] mr-1"></i> Non-Veg
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category Pills Horizontal Scroll -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2 pt-2 no-scrollbar border-t border-stone-800/80" id="category-tabs-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Food Cards Grid -->
+                <div id="full-menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- Empty State Message -->
+                <div id="menu-empty-state" class="hidden text-center py-20 bg-brand-card rounded-3xl border border-stone-800">
+                    <i class="fa-solid fa-utensils text-5xl text-stone-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-stone-200">No dishes matched your search</h3>
+                    <p class="text-stone-400 text-sm mt-1">Try searching for a different keyword or category.</p>
+                    <button onclick="resetMenuFilters()" class="mt-4 px-6 py-2 bg-amber-500 text-stone-950 font-bold rounded-full text-xs uppercase tracking-wider">Reset Filters</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: RESERVATION PAGE ================= -->
+        <section id="page-reservation" class="page-section hidden py-12">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Reserve A Table</span>
+                    <h1 class="font-heading text-4xl sm:text-6xl font-bold mt-2 text-stone-100">Book Your Experience</h1>
+                    <p class="text-stone-400 text-sm sm:text-base mt-2">Whether it's a romantic dinner, family gathering, or business meeting, we ensure an extraordinary culinary journey.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Form Container -->
+                    <div class="lg:col-span-8 bg-brand-card p-6 sm:p-10 rounded-3xl border border-stone-800 shadow-2xl">
+                        <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-6">
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <!-- Full Name -->
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Full Name *</label>
+                                    <input type="text" id="res-name" required placeholder="John Doe" class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                </div>
+
+                                <!-- Phone Number -->
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Phone Number *</label>
+                                    <input type="tel" id="res-phone" required placeholder="+1 (786) 544-3327" value="7865443327" class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <!-- Email -->
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Email Address *</label>
+                                    <input type="email" id="res-email" required placeholder="john@example.com" class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                </div>
+
+                                <!-- Number of Guests -->
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Guests *</label>
+                                    <select id="res-guests" required class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                        <option value="2 People">2 Guests (Couple)</option>
+                                        <option value="4 People">4 Guests (Family)</option>
+                                        <option value="6 People">6 Guests (Group)</option>
+                                        <option value="8+ People">8+ Guests (Party)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <!-- Date -->
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Date *</label>
+                                    <input type="date" id="res-date" required class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                </div>
+
+                                <!-- Time Slot -->
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Preferred Time *</label>
+                                    <select id="res-time" required class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                        <option value="12:30 PM">12:30 PM (Lunch)</option>
+                                        <option value="02:00 PM">02:00 PM (Lunch)</option>
+                                        <option value="07:00 PM">07:00 PM (Dinner)</option>
+                                        <option value="08:30 PM">08:30 PM (Dinner)</option>
+                                        <option value="09:45 PM">09:45 PM (Late Night)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Special Requests -->
+                            <div>
+                                <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Special Request / Dietary Notes</label>
+                                <textarea id="res-notes" rows="3" placeholder="Anniversary table setup, food allergies, quiet corner booth..." class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-stone-950 font-bold py-4 rounded-xl text-base shadow-lg transition-transform hover:scale-[1.01]">
+                                Confirm Table Reservation
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Side Reservation Info Box -->
+                    <div class="lg:col-span-4 bg-brand-card p-6 sm:p-8 rounded-3xl border border-stone-800 space-y-6">
+                        <h3 class="font-heading text-xl font-bold text-amber-400">Reservation Policy</h3>
+                        
+                        <div class="space-y-4 text-xs text-stone-300 leading-relaxed">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-clock text-amber-500 mt-0.5"></i>
+                                <span><b>Grace Period:</b> Tables will be held for 15 minutes past reservation time.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-users text-amber-500 mt-0.5"></i>
+                                <span><b>Large Groups:</b> For parties larger than 10, please call us directly.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-headset text-amber-500 mt-0.5"></i>
+                                <span><b>Instant Support:</b> Call <a href="tel:7865443327" class="text-amber-400 underline">+1 (786) 544-3327</a> for immediate changes.</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
+                            <span class="text-amber-400 font-bold text-xs uppercase block mb-1">Private Dining Events</span>
+                            <p class="text-xs text-stone-300">Hosting a wedding or corporate dinner? Rent our luxury private VIP hall.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 4: ABOUT US PAGE ================= -->
+        <section id="page-about" class="page-section hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+                
+                <!-- Story Hero -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Our Heritage</span>
+                        <h1 class="font-heading text-4xl sm:text-6xl font-bold mt-2 text-stone-100 leading-tight">Passion for Culinary Perfection</h1>
+                        <p class="text-stone-300 text-sm sm:text-base mt-6 leading-relaxed">
+                            Founded in 2015, <b>Spice & Sizzle</b> was born from a deep love for rich aromatic spices, open charcoal woodfire grilling, and farm-fresh ingredients. We bring together ancient culinary heritage and contemporary gastronomy under one luxury ambient roof.
+                        </p>
+                        <p class="text-stone-400 text-sm mt-4 leading-relaxed">
+                            Every dish tells a story—from hand-pounded organic spices imported directly from coastal farms to our 72-hour slow-fermented pizza dough and prime cuts smoked over hickory wood.
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl blur-xl opacity-20"></div>
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" alt="Restaurant Ambiance" class="relative rounded-3xl object-cover w-full h-[400px] border border-stone-800 shadow-2xl">
+                    </div>
+                </div>
+
+                <!-- Meet Executive Chef -->
+                <div class="bg-brand-card p-8 sm:p-12 rounded-3xl border border-stone-800 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-5">
+                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=800&auto=format&fit=crop" alt="Head Chef" class="rounded-2xl object-cover w-full h-80 border border-amber-500/30">
+                    </div>
+                    <div class="md:col-span-7 space-y-4">
+                        <span class="text-amber-500 text-xs font-bold uppercase tracking-wider">Executive Head Chef</span>
+                        <h2 class="font-heading text-3xl font-bold text-stone-100">Chef Marco Vance</h2>
+                        <p class="text-stone-300 text-sm leading-relaxed">
+                            With over 18 years of experience in Michelin-starred establishments across Europe and Asia, Chef Vance brings unprecedented mastery and flair to Spice & Sizzle.
+                        </p>
+                        <blockquote class="italic text-amber-400/90 border-l-2 border-amber-500 pl-4 text-sm font-heading">
+                            "Cooking is not just about taste; it is an emotional sensory journey that connects hearts across cultures."
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- Gallery Section with Lightbox -->
+                <div>
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Visual Feast</span>
+                        <h2 class="font-heading text-3xl font-bold mt-2 text-stone-100">Spice & Sizzle Gallery</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="cursor-pointer overflow-hidden rounded-2xl group border border-stone-800" onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=600&auto=format&fit=crop" alt="Gallery 1" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="cursor-pointer overflow-hidden rounded-2xl group border border-stone-800" onclick="openLightbox('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop" alt="Gallery 2" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="cursor-pointer overflow-hidden rounded-2xl group border border-stone-800" onclick="openLightbox('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600&auto=format&fit=crop" alt="Gallery 3" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="cursor-pointer overflow-hidden rounded-2xl group border border-stone-800" onclick="openLightbox('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=600&auto=format&fit=crop" alt="Gallery 4" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 5: CONTACT PAGE ================= -->
+        <section id="page-contact" class="page-section hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-2xl mx-auto">
+                    <span class="text-amber-500 uppercase tracking-widest text-xs font-bold">Get In Touch</span>
+                    <h1 class="font-heading text-4xl sm:text-6xl font-bold mt-2 text-stone-100">Contact Us</h1>
+                    <p class="text-stone-400 text-sm sm:text-base mt-2">Have a question or feedback? We'd love to hear from you.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Contact Information Cards -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-brand-card p-6 rounded-2xl border border-stone-800 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-stone-100 text-sm">Restaurant Address</h3>
+                                <p class="text-xs text-stone-300 mt-1">786 Culinary Boulevard, Gourmet Quarter<br>Suite 400, Food District</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-card p-6 rounded-2xl border border-stone-800 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-stone-100 text-sm">Phone & WhatsApp Order</h3>
+                                <p class="text-xs text-stone-300 mt-1"><a href="tel:7865443327" class="hover:text-amber-400 underline">+1 (786) 544-3327</a></p>
+                                <p class="text-[11px] text-amber-500 mt-0.5">Available for WhatsApp Orders & Table Support</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-card p-6 rounded-2xl border border-stone-800 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl flex-shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-stone-100 text-sm">Opening Hours</h3>
+                                <p class="text-xs text-stone-300 mt-1">Monday – Sunday: 11:00 AM – 11:00 PM</p>
+                                <p class="text-xs text-stone-400">Kitchen Closes at 10:30 PM</p>
+                            </div>
+                        </div>
+
+                        <!-- Embedded Google Map -->
+                        <div class="rounded-2xl overflow-hidden border border-stone-800 h-64">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.992823614264!2d77.216721!3d28.632425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e632623a82!2sConnaught%20Place%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" class="w-full h-full border-0 grayscale invert" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-7 bg-brand-card p-8 rounded-3xl border border-stone-800">
+                        <h3 class="font-heading text-2xl font-bold text-stone-100 mb-6">Send Us A Message</h3>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Your Name *</label>
+                                    <input type="text" required placeholder="John Smith" class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Email Address *</label>
+                                    <input type="email" required placeholder="john@example.com" class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Subject</label>
+                                <input type="text" placeholder="General Inquiry / Private Dining" class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-semibold text-stone-300 mb-2">Message *</label>
+                                <textarea rows="5" required placeholder="Write your message here..." class="w-full bg-stone-900 border border-stone-700/80 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-stone-950 font-bold py-4 rounded-xl text-sm shadow-lg">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= SHOPPING CART MODAL ================= -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div onclick="toggleCartModal()" class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- Cart Drawer Container -->
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-brand-dark border-l border-stone-800 shadow-2xl flex flex-col z-10 animate-slide-in">
+            <!-- Header -->
+            <div class="p-6 border-b border-stone-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bag-shopping text-amber-500 text-xl"></i>
+                    <h2 class="font-heading text-xl font-bold text-stone-100">Your Cart (<span id="cart-item-count">0</span>)</h2>
+                </div>
+                <button onclick="toggleCartModal()" class="text-stone-400 hover:text-stone-100 text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <!-- Cart Footer Summary -->
+            <div class="p-6 border-t border-stone-800 bg-brand-card space-y-4">
+                
+                <!-- Promo Code Box -->
+                <div class="flex gap-2">
+                    <input type="text" id="cart-promo-code" placeholder="Promo code (e.g. SIZZLE20)" class="bg-stone-900 border border-stone-700 text-xs text-stone-100 rounded-xl px-3 py-2 flex-grow uppercase focus:outline-none focus:border-amber-500">
+                    <button onclick="applyPromoCode()" class="bg-stone-800 hover:bg-stone-700 text-amber-400 font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider border border-amber-500/30">Apply</button>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="space-y-2 text-xs text-stone-300">
+                    <div class="flex justify-between">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-emerald-400 hidden" id="discount-row">
+                        <span>Promo Discount (20%)</span>
+                        <span id="cart-discount">-$0.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Delivery Fee</span>
+                        <span id="cart-delivery">$3.99</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-base text-stone-100 pt-2 border-t border-stone-800">
+                        <span>Total Price</span>
+                        <span id="cart-total" class="text-amber-400">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="space-y-2 pt-2">
+                    <button onclick="openCheckoutModal()" id="btn-checkout" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-stone-950 font-bold py-3.5 rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                        <span>Proceed to Checkout</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button onclick="orderViaWhatsAppDirect()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl text-xs flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Quick Order on WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= CHECKOUT MODAL ================= -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeCheckoutModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative bg-brand-card border border-stone-800 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6 border-b border-stone-800 pb-4">
+                <h2 class="font-heading text-2xl font-bold text-stone-100">Complete Your Order</h2>
+                <button onclick="closeCheckoutModal()" class="text-stone-400 hover:text-stone-100 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-1">Full Name *</label>
+                    <input type="text" required placeholder="John Doe" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-4 py-2.5 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-stone-300 mb-1">Phone Number *</label>
+                        <input type="tel" required placeholder="7865443327" value="7865443327" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-4 py-2.5 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-stone-300 mb-1">Payment Method</label>
+                        <select class="w-full bg-stone-900 border border-stone-700 rounded-xl px-4 py-2.5 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                            <option value="cod">Cash on Delivery</option>
+                            <option value="card">Credit / Debit Card</option>
+                            <option value="upi">UPI / Mobile Pay</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-semibold text-stone-300 mb-1">Delivery Address *</label>
+                    <textarea rows="3" required placeholder="Street address, Apartment or Suite..." class="w-full bg-stone-900 border border-stone-700 rounded-xl px-4 py-2.5 text-sm text-stone-100 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+                </div>
+
+                <div class="bg-stone-900 p-4 rounded-xl border border-stone-800 my-4 text-xs space-y-1">
+                    <div class="flex justify-between font-bold text-stone-200">
+                        <span>Total Payable:</span>
+                        <span id="checkout-total-display" class="text-amber-400 font-mono text-sm">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-stone-950 font-bold py-3.5 rounded-xl text-sm shadow-md">
+                    Place Order Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Gallery Preview" class="max-w-full max-h-[85vh] rounded-2xl border-2 border-amber-500/40 shadow-2xl">
+    </div>
+
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-950 border-t border-stone-800 text-stone-400 text-xs py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+            <!-- Brand Column -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-600 to-orange-500 flex items-center justify-center text-stone-950 font-bold">
+                        <i class="fa-solid fa-pepper-hot text-base"></i>
+                    </div>
+                    <span class="font-heading text-xl font-bold text-stone-100">Spice & Sizzle</span>
+                </div>
+                <p class="leading-relaxed">Culinary perfection crafted with authentic spices, fresh local farm produce, and woodfire artistry.</p>
+                <div class="flex gap-3 text-stone-300 text-base">
+                    <a href="#" class="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center hover:text-amber-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center hover:text-amber-400 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://wa.me/17865443327" target="_blank" class="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center hover:text-amber-400 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div>
+                <h4 class="font-bold text-stone-100 text-sm mb-4 uppercase tracking-wider">Quick Navigation</h4>
+                <ul class="space-y-2">
+                    <li><button onclick="switchTab('home')" class="hover:text-amber-400">Home</button></li>
+                    <li><button onclick="switchTab('menu')" class="hover:text-amber-400">Gourmet Food Menu</button></li>
+                    <li><button onclick="switchTab('reservation')" class="hover:text-amber-400">Table Reservation</button></li>
+                    <li><button onclick="switchTab('about')" class="hover:text-amber-400">Our Chef's Story</button></li>
+                    <li><button onclick="switchTab('contact')" class="hover:text-amber-400">Contact & Map</button></li>
+                </ul>
+            </div>
+
+            <!-- Menu Highlights -->
+            <div>
+                <h4 class="font-bold text-stone-100 text-sm mb-4 uppercase tracking-wider">Popular Specialties</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="filterCategoryAndSwitch('Pizza')" class="hover:text-amber-400">Wood-fired Truffle Pizza</a></li>
+                    <li><a href="#" onclick="filterCategoryAndSwitch('Indian Specials')" class="hover:text-amber-400">Royal Butter Chicken</a></li>
+                    <li><a href="#" onclick="filterCategoryAndSwitch('Burgers')" class="hover:text-amber-400">Smoky Wagyu Burger</a></li>
+                    <li><a href="#" onclick="filterCategoryAndSwitch('Desserts')" class="hover:text-amber-400">Sizzling Brownie Sundae</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Summary -->
+            <div>
+                <h4 class="font-bold text-stone-100 text-sm mb-4 uppercase tracking-wider">Direct Hotline</h4>
+                <p class="mb-2"><i class="fa-solid fa-phone text-amber-500 mr-2"></i> +1 (786) 544-3327</p>
+                <p class="mb-2"><i class="fa-solid fa-envelope text-amber-500 mr-2"></i> orders@spicesizzle.com</p>
+                <p><i class="fa-solid fa-location-dot text-amber-500 mr-2"></i> 786 Culinary Blvd, Food City</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-stone-900 pt-6 flex flex-col sm:flex-row justify-between items-center text-[11px] text-stone-500 gap-4">
+            <p>&copy; 2026 Spice & Sizzle Fine Dining. All rights reserved.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll To Top Floating Button -->
+    <button onclick="scrollToTop()" id="scroll-top-btn" class="fixed bottom-6 right-6 z-40 bg-gradient-to-tr from-amber-500 to-orange-600 text-stone-950 w-11 h-11 rounded-full shadow-2xl flex items-center justify-center text-lg opacity-0 pointer-events-none transition-all hover:scale-110">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data Store: Dishes Menu Catalog
+        const menuDishes = [
+            {
+                id: 'd1',
+                name: 'Royal Butter Chicken',
+                category: 'Indian Specials',
+                price: 18.99,
+                diet: 'non-veg',
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=800&auto=format&fit=crop',
+                description: 'Tender tandoori chicken simmered in a velvety tomato, cashew nut, and butter gravy with fenugreek.'
+            },
+            {
+                id: 'd2',
+                name: 'Truffle & Mushroom Artisanal Pizza',
+                category: 'Pizza',
+                price: 21.50,
+                diet: 'veg',
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop',
+                description: '72-hour slow-fermented crust topped with wild truffles, wild mushrooms, fresh mozzarella, and thyme.'
+            },
+            {
+                id: 'd3',
+                name: 'Smoky Wagyu BBQ Burger',
+                category: 'Burgers',
+                price: 19.99,
+                diet: 'non-veg',
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop',
+                description: 'Prime Wagyu beef patty, double cheddar, crispy smoked bacon, onion rings, and signature sizzle sauce.'
+            },
+            {
+                id: 'd4',
+                name: 'Steamed Truffle Dim Sum',
+                category: 'Starters',
+                price: 14.50,
+                diet: 'veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=800&auto=format&fit=crop',
+                description: 'Handcrafted dumplings filled with wild exotic mushrooms, water chestnut, and truffle essence.'
+            },
+            {
+                id: 'd5',
+                name: 'Kung Pao Firecrackers',
+                category: 'Chinese',
+                price: 17.25,
+                diet: 'non-veg',
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1525755662778-989d0524087e?q=80&w=800&auto=format&fit=crop',
+                description: 'Wok-tossed succulent chicken breast with Sichuan chili peppers, crunchy peanuts, and scallions.'
+            },
+            {
+                id: 'd6',
+                name: 'Sizzling Chocolate Lava Brownie',
+                category: 'Desserts',
+                price: 11.99,
+                diet: 'veg',
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=800&auto=format&fit=crop',
+                description: 'Warm Belgian chocolate brownie served on a sizzling hot plate with Madagascar vanilla bean ice cream.'
+            },
+            {
+                id: 'd7',
+                name: 'Margherita Supreme Woodfire',
+                category: 'Pizza',
+                price: 16.99,
+                diet: 'veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?q=80&w=800&auto=format&fit=crop',
+                description: 'San Marzano tomato sauce, fresh buffalo mozzarella, extra virgin olive oil, and organic basil leaves.'
+            },
+            {
+                id: 'd8',
+                name: 'Hyderabadi Dum Biryani',
+                category: 'Indian Specials',
+                price: 20.00,
+                diet: 'non-veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=800&auto=format&fit=crop',
+                description: 'Long-grain fragrant basmati rice layered with spiced marinated mutton and saffron, cooked sealed in clay handi.'
+            },
+            {
+                id: 'd9',
+                name: 'Crispy Garlic Pepper Wings',
+                category: 'Starters',
+                price: 13.99,
+                diet: 'non-veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?q=80&w=800&auto=format&fit=crop',
+                description: 'Double-fried jumbo chicken wings tossed in garlic butter, fresh cracked black pepper, and scallions.'
+            },
+            {
+                id: 'd10',
+                name: 'Paneer Tikka Charcoal Grill',
+                category: 'Starters',
+                price: 15.00,
+                diet: 'veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=800&auto=format&fit=crop',
+                description: 'Cottage cheese cubes marinated in yellow spicy yogurt and charred over glowing clay oven embers.'
+            },
+            {
+                id: 'd11',
+                name: 'Signature Mint Passion Mojito',
+                category: 'Beverages',
+                price: 8.50,
+                diet: 'veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop',
+                description: 'Fresh crushed mint leaves, passion fruit puree, lime juice, and sparkling soda over crushed ice.'
+            },
+            {
+                id: 'd12',
+                name: 'Mango Lassi Royal',
+                category: 'Beverages',
+                price: 6.99,
+                diet: 'veg',
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1571006682880-99436155988e?q=80&w=800&auto=format&fit=crop',
+                description: 'Thick churned Alphonso mango yogurt drink garnished with toasted pistachio flakes and saffron.'
+            }
+        ];
+
+        // Categories List
+        const categories = ['All', 'Starters', 'Main Course', 'Pizza', 'Burgers', 'Indian Specials', 'Chinese', 'Desserts', 'Beverages'];
+
+        // Global Application State
+        let activeCategory = 'All';
+        let activeDiet = 'all';
+        let searchQuery = '';
+        let cart = [];
+        let isDiscountApplied = false;
+
+        // Initialize App on DOM Content Loaded
+        window.onload = function() {
+            renderFeaturedDishes();
+            renderCategoryTabs();
+            renderMenuGrid();
+            setupScrollListener();
+        };
+
+        // Tab Switcher Logic
+        function switchTab(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav Active States
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('text-amber-400', 'font-semibold');
+                link.classList.add('text-stone-300');
+            });
+
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) {
+                activeNav.classList.add('text-amber-400', 'font-semibold');
+                activeNav.classList.remove('text-stone-300');
+            }
+        }
+
+        // Filter Category and Jump to Menu
+        function filterCategoryAndSwitch(catName) {
+            activeCategory = catName;
+            switchTab('menu');
+            renderCategoryTabs();
+            renderMenuGrid();
+        }
+
+        // Render Featured Dishes (Home Page)
+        function renderFeaturedDishes() {
+            const container = document.getElementById('featured-dishes-grid');
+            if (!container) return;
+
+            const featured = menuDishes.filter(dish => dish.featured);
+            container.innerHTML = featured.map(dish => createFoodCardHTML(dish)).join('');
+        }
+
+        // Render Category Filter Tabs (Menu Page)
+        function renderCategoryTabs() {
+            const container = document.getElementById('category-tabs-container');
+            if (!container) return;
+
+            container.innerHTML = categories.map(cat => {
+                const isActive = activeCategory === cat;
+                return `
+                    <button onclick="setCategory('${cat}')" class="px-5 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                        isActive 
+                        ? 'bg-amber-500 text-stone-950 shadow-md scale-105' 
+                        : 'bg-stone-900 border border-stone-800 text-stone-300 hover:text-amber-400 hover:border-amber-500/40'
+                    }">
+                        ${cat}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function setCategory(cat) {
+            activeCategory = cat;
+            renderCategoryTabs();
+            renderMenuGrid();
+        }
+
+        function filterDietary(diet) {
+            activeDiet = diet;
+            document.querySelectorAll('.diet-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-stone-950');
+                btn.classList.add('bg-stone-900', 'text-stone-300');
+            });
+            const activeBtn = document.getElementById('diet-' + diet);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-amber-500', 'text-stone-950');
+            }
+            renderMenuGrid();
+        }
+
+        function handleMenuSearch() {
+            searchQuery = document.getElementById('menu-search-input').value.toLowerCase().trim();
+            renderMenuGrid();
+        }
+
+        function resetMenuFilters() {
+            activeCategory = 'All';
+            activeDiet = 'all';
+            searchQuery = '';
+            document.getElementById('menu-search-input').value = '';
+            renderCategoryTabs();
+            filterDietary('all');
+            renderMenuGrid();
+        }
+
+        // Render Menu Grid
+        function renderMenuGrid() {
+            const container = document.getElementById('full-menu-grid');
+            const emptyState = document.getElementById('menu-empty-state');
+            if (!container) return;
+
+            let filtered = menuDishes.filter(dish => {
+                const matchesCategory = (activeCategory === 'All') || (dish.category === activeCategory);
+                const matchesDiet = (activeDiet === 'all') || (dish.diet === activeDiet);
+                const matchesSearch = dish.name.toLowerCase().includes(searchQuery) || dish.description.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesDiet && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                container.innerHTML = filtered.map(dish => createFoodCardHTML(dish)).join('');
+            }
+        }
+
+        // Card HTML Generator
+        function createFoodCardHTML(dish) {
+            const dietBadge = dish.diet === 'veg' 
+                ? `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-600/40 px-2 py-0.5 rounded-full"><i class="fa-solid fa-circle text-[6px]"></i> VEG</span>`
+                : `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-rose-400 bg-rose-950/80 border border-rose-600/40 px-2 py-0.5 rounded-full"><i class="fa-solid fa-square text-[6px]"></i> NON-VEG</span>`;
+
+            return `
+                <div class="bg-brand-card rounded-3xl border border-stone-800/80 overflow-hidden group hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <!-- Dish Image -->
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 flex gap-2">
+                                ${dietBadge}
+                            </div>
+                            <div class="absolute top-3 right-3 bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-full border border-amber-500/30 text-amber-400 font-bold text-sm">
+                                $${dish.price.toFixed(2)}
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-5">
+                            <span class="text-[10px] uppercase font-bold text-amber-500/80 tracking-widest">${dish.category}</span>
+                            <h3 class="font-heading text-lg font-bold text-stone-100 mt-1 group-hover:text-amber-400 transition-colors">${dish.name}</h3>
+                            <p class="text-stone-400 text-xs mt-2 line-clamp-2 leading-relaxed">${dish.description}</p>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart('${dish.id}')" class="w-full bg-stone-900 hover:bg-gradient-to-r hover:from-amber-500 hover:to-orange-600 hover:text-stone-950 border border-amber-500/30 hover:border-transparent text-amber-400 font-semibold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-2 group-hover:shadow-md">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Shopping Cart Logic
+        function addToCart(dishId) {
+            const dish = menuDishes.find(d => d.id === dishId);
+            if (!dish) return;
+
+            const existing = cart.find(item => item.id === dishId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...dish, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${dish.name}" to your cart!`);
+        }
+
+        function updateQuantity(dishId, change) {
+            const item = cart.find(i => i.id === dishId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== dishId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            // Update Cart Badge
+            const badge = document.getElementById('cart-badge');
+            badge.innerText = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove('scale-0');
+            } else {
+                badge.classList.add('scale-0');
+            }
+
+            document.getElementById('cart-item-count').innerText = totalItems;
+
+            // Render Cart Drawer Items
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-stone-500 space-y-3">
+                        <i class="fa-solid fa-cart-shopping text-4xl"></i>
+                        <p class="text-sm">Your order cart is currently empty.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-4 bg-stone-900 p-3 rounded-2xl border border-stone-800">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-semibold text-xs text-stone-100 truncate">${item.name}</h4>
+                            <p class="text-amber-400 font-bold text-xs mt-0.5">$${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-stone-950 border border-stone-800 rounded-lg px-2 py-1">
+                            <button onclick="updateQuantity('${item.id}', -1)" class="text-stone-400 hover:text-amber-400 text-xs px-1">-</button>
+                            <span class="text-xs font-bold text-stone-200 px-1">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', 1)" class="text-stone-400 hover:text-amber-400 text-xs px-1">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Price Calculations
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discount = isDiscountApplied ? (subtotal * 0.20) : 0;
+            const delivery = subtotal > 0 ? 3.99 : 0;
+            const total = Math.max(0, subtotal - discount + delivery);
+
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-discount').innerText = `-$${discount.toFixed(2)}`;
+            document.getElementById('cart-delivery').innerText = `$${delivery.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
+            
+            const checkoutTotal = document.getElementById('checkout-total-display');
+            if (checkoutTotal) checkoutTotal.innerText = `$${total.toFixed(2)}`;
+
+            const discountRow = document.getElementById('discount-row');
+            if (isDiscountApplied) {
+                discountRow.classList.remove('hidden');
+            } else {
+                discountRow.classList.add('hidden');
+            }
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function applyPromoCode() {
+            const codeInput = document.getElementById('cart-promo-code');
+            const code = codeInput.value.trim().toUpperCase();
+            if (code === 'SIZZLE20') {
+                isDiscountApplied = true;
+                showToast('Promo Code SIZZLE20 Applied! 20% OFF');
+                updateCartUI();
+            } else {
+                showToast('Invalid Promo Code. Try SIZZLE20');
+            }
+        }
+
+        function orderViaWhatsAppDirect() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty! Add items first.');
+                return;
+            }
+            let text = "Hi Spice & Sizzle! I would like to place an order:\n\n";
+            cart.forEach(item => {
+                text += `• ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})\n`;
+            });
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            text += `\nSubtotal: $${subtotal.toFixed(2)}`;
+            if (isDiscountApplied) text += `\nDiscount (20% OFF Applied)`;
+            text += `\nPlease confirm delivery address!`;
+
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/17865443327?text=${encoded}`, '_blank');
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) {
+                showToast('Please add items to your cart before checkout.');
+                return;
+            }
+            toggleCartModal();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function handleCheckoutSubmit(e) {
+            e.preventDefault();
+            closeCheckoutModal();
+            cart = [];
+            isDiscountApplied = false;
+            updateCartUI();
+            showToast('🎉 Order Placed Successfully! Your food is being prepared.');
+        }
+
+        // Reservation Form Handler
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('res-name').value;
+            const date = document.getElementById('res-date').value;
+            const time = document.getElementById('res-time').value;
+            
+            showToast(`Table Reserved for ${name} on ${date} at ${time}!`);
+            document.getElementById('reservation-form').reset();
+        }
+
+        // Contact Form Handler
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Thank you for contacting Spice & Sizzle. We will reply shortly!');
+            e.target.reset();
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto bg-stone-900 border border-amber-500/50 text-stone-100 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-semibold animate-bounce';
+            toast.innerHTML = `
+                <div class="w-6 h-6 rounded-full bg-amber-500 text-stone-950 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Mobile Hamburger Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Gallery Lightbox
+        function openLightbox(imgSrc) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        // Scroll to Top Listener
+        function setupScrollListener() {
+            const btn = document.getElementById('scroll-top-btn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    btn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    btn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
